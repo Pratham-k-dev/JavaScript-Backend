@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .child {
+            border: 2px solid black;
+            padding: 10px;
+            /* width: 50px; */
+            margin: 20px;
+            background-color: aqua;
+        }
+
+        .parent {
+            border: 2px solid black;
+            padding: 5px;
+            /* width: 100px; */
+            margin: 10px;
+            background-color: rgb(238, 255, 0);
+        }
+
+        .grandparent {
+            border: 2px solid black;
+            padding: 5px;
+            /* width: 100px; */
+            margin: 10px;
+            background-color: rgb(255, 0, 153);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        Hey there wassup
+    </div>
+    <button class="btn">Click Me</button>
+
+
+    <div class="grandparent">
+        <div class="parent">
+            <div class="child">
+                I am a child
+            </div>
+        </div>
+    </div>
+    <script>
+        let b = document.querySelector(".btn");
+        let container = document.querySelector(".container");
+        b.addEventListener("click", () => {
+            container.style.color = (container.style.color === "red" ? "black" : "red");
+        })
+        b.addEventListener("contextmenu", () => {
+            alert("hey do not right click pliz")
+        })
+
+
+        // here starts concept of event bubling
+
+        document.querySelector(".child").addEventListener("click", () => {
+
+            alert("child has been clicked"); //parent ,grand parent gets executed
+        })
+        document.querySelector(".parent").addEventListener("click", (e) => {
+            e.stopPropagation() // doesnt show alerts of higher classes
+
+            alert("parent has been clicked");
+        })
+        document.querySelector(".grandparent").addEventListener("click", () => {
+
+            alert("grandparent has been clicked");
+        })
+
+        //time interval
+        let a = document.querySelector(".parent");
+        let c = document.querySelector(".grandparent");
+        // let i=setInterval(() => {
+        //     a.style.backgroundColor=(a.style.backgroundColor==="rgb(238, 255, 0)"?"rgb(255, 0, 153)":"rgb(238, 255, 0)");
+        //     c.style.backgroundColor=(a.style.backgroundColor==="rgb(255, 0, 153)"?"rgb(238, 255, 0)":"rgb(255, 0, 153)");
+        // }, 1000);
+        // console.log(i);
+        setTimeout(() => {
+            a.style.backgroundColor = "rgb(255, 0, 153)";
+            c.style.backgroundColor = "rgb(238, 255, 0)";
+        }, 1000); //only once after interval
+
+        
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hacker Simulator</title>
+  <style>
+    /* ---------- Page & background ---------- */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      color: #00ff00;
+      background-image: url("https://media.istockphoto.com/id/521971823/photo/faceless-hooded-anonymous-computer-hacker.jpg?s=1024x1024&w=is&k=20&c=9EioQia8uPepJAVv9RmZzcUWgMVlj1yawSIFfsXT3ks=");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* dark overlay so text is readable */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7); /* tweak darkness here */
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---------- Center the content ---------- */
+    .container {
+      position: relative;
+      z-index: 1; /* above overlay */
+      min-height: 100vh;           /* full viewport height */
+      display: flex;
+      flex-direction: column;
+      align-items: center;         /* horizontal center */
+      justify-content: center;     /* vertical center */
+      gap: 18px;
+      padding: 24px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* ---------- Headings ---------- */
+    h1, h2 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 56px);
+      color: #00ff00;
+      text-shadow: 0 0 10px #00ff00, 0 0 24px #00ff00;
+    }
+
+    h2 {
+      font-size: clamp(14px, 2.2vw, 20px);
+      color: #00ff00;
+      text-shadow: 0 0 6px #00ff00;
+      opacity: 0.95;
+    }
+
+    /* optional flicker */
+    @keyframes flicker {
+      0%,100% { opacity: 1; }
+      50%     { opacity: 0.85; }
+    }
+    h1, h2 { animation: flicker 1.2s infinite; }
+
+    /* ---------- Message box (single line changing) ---------- */
+    #message-box {
+      width: min(90vw, 820px);
+      box-sizing: border-box;
+      padding: 16px 18px;
+      background: rgba(0,0,0,0.55); /* semi-transparent panel */
+      border: 1px solid rgba(5,165,5,0.6);
+      color: #00ff00;
+      font-size: 1.05rem;
+      line-height: 1.4;
+      border-radius: 6px;
+      display: inline-block;
+      min-height: 48px;
+      vertical-align: middle;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    /* footer */
+    .footer {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #8af08a;
+      opacity: 0.9;
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 420px) {
+      #message-box { font-size: 0.95rem; padding: 12px; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ACCESS GRANTED</h1>
+    <h2>You are in Hacker's Terminal</h2>
+
+    <div id="message-box" aria-live="polite" role="status"></div>
+
+    <div class="footer">Warning: Unauthorized access may trigger alerts.</div>
+  </div>
+
+  <script>
+    const box = document.querySelector("#message-box");
+
+    function showLine(msg, durationMs = 2000, dotIntervalMs = 200) {
+      return new Promise((resolve) => {
+        let i = 0;
+        const states = ["", ".", "..", "..."]; // start without dot if you want
+        // show first immediately (optionally)
+        box.textContent = msg + " ";
+
+        const interval = setInterval(() => {
+          box.textContent = msg + " " + states[i];
+          i = (i + 1) % states.length;
+        }, dotIntervalMs);
+
+        setTimeout(() => {
+          clearInterval(interval);
+          box.textContent = msg; // final text without dots
+          resolve();
+        }, durationMs);
+      });
+    }
+
+    async function main(){
+      const tm = 3000;
+      await showLine("Initializing hacking", tm);
+      await showLine("Reading your files", tm);
+      await showLine("Password files detected", tm);
+      await showLine("Sending files to server", tm);
+      await showLine("Cleaning up", tm);
+      box.textContent = "You Have been Hacked!";
+    }
+
+    main();
+  </script>
+</body>
+</html>

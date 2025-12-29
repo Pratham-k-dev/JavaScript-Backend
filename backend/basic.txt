@@ -1,0 +1,11 @@
+// we can use alredy written code on our device using modules
+npm init //initializes a project
+npm init -y //to skip questions
+npm i some-package // installs package
+nodejs.org
+https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
+
+npm i --global nodemon  //global installation not only for current project
+
+
+nodemon server.js // we dont have to restart server always to reflectt changes

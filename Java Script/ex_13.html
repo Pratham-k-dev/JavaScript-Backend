@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic WebSite</title>
+    <style>
+        .box{
+            /* border: 2px solid black; */
+            color: azure;
+            width: 35px;
+            height: 15px;
+            background-color: rgba(0, 0, 0, 0.607);
+            position: relative;
+            top: -19px;
+            left: 160px ;
+            font-size: small;
+            display: flex;
+            justify-content: center;
+            
+        }
+        .container{
+            display: flex;
+            gap: 20px;
+            /* border: 1px solid black; */
+            background-color: rgba(0, 0, 0, 0.071);
+           
+        }
+        .bld{
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="image1.png" width="250" >
+
+        <div class="content">
+            
+            
+        </div>
+        
+    </div>
+    <div class="box">
+        
+    </div>
+    <script>
+        function f(title,creator,views,time,months){
+            let e=document.createElement('p');
+                e.innerHTML=`${title}`;
+                document.querySelector(".content").append(e);
+                e.classList.add("bld")
+                
+                let e2=document.createElement('p');
+                e2.innerHTML=`${creator} <b> &middot; </b>`
+                e.after(e2);
+                if(views <1000){
+                    e2.innerHTML+=`${views} views`;
+                }
+                else if(views>=1000 && views< 1e6){
+                    e2.innerHTML+=`${views/1000}K views`;
+                    
+                }
+                else {
+                    e2.innerHTML+=`${views/1e6}M views`;
+
+                }
+                e2.innerHTML+="<b> &middot; </b>"
+                let bs=document.querySelector(".box").style;
+                bs.left=(250-time.length*9-5)+"px"
+                bs.width=time.length*9+"px";
+                document.querySelector(".box").innerHTML=`${time}`
+                e2.innerHTML+=`${months} months ago`
+
+        };
+        f("Indian Space Research Organisation | About GSLV Mark III","ISRO",2000,"20:00",2);
+    </script>
+</body>
+</html>

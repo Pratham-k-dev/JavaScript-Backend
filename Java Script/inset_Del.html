@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            border: 2px solid black;
+            width: 20px;
+            height: 20px;
+        }
+        .here{
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box ">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <b></b>
+        
+    </div>
+    <script>
+        let ele=document.createElement('div');
+        ele.innerHTML="inserted";
+        ele.setAttribute("class","here");
+        ele.classList.add("box")
+        document.body.getElementsByClassName("box")[2].before(ele);
+        // document.querySelector(".container").append(ele);
+
+        document.querySelector(".container").insertAdjacentHTML("beforebegin"," <b>hello there</b>")
+        document.querySelector(".box").classList.toggle("here")
+    </script>
+</body>
+</html>

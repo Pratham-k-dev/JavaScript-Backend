@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> bookmarks</title>
+    <style>
+        .lst{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="b1">add bookmark</button>
+    <ul class="list">
+        
+    </ul>
+    <script >
+        let b=document.querySelector(".b1")
+        b.addEventListener("click",()=>{
+            let t=prompt("enter url")
+            let ele=document.createElement("li")
+            ele.classList.add("lst")
+            ele.innerHTML=t
+            document.querySelector(".list").append(ele)
+        })
+
+        
+
+    </script>
+</body>
+</html>
